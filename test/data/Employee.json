@@ -1,0 +1,11 @@
+
+{
+    "employee": {
+        "firstName": "James",
+        "lastName": "Smith",
+        "email": "james.smith@gmail.com",
+        "identification": "1234567890",
+        "leaderName": "Joshua",
+        "startWorkingOn": "21-01-2014"
+    }
+}

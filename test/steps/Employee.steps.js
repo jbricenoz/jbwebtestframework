@@ -9,7 +9,7 @@ import * as systemLabels from '../constants/system.constants';
 
 Given(/^I'm on the login page$/, function(){
     browser.url('/');
-    browser.setWindowSize(1920, 1080);
+    browser.setWindowSize(1280, 720);
 })
 
 When(/^I log in with a default user$/, function(){
@@ -31,7 +31,19 @@ Then(/^I see the employee details$/, function(){
 
 Then(/^the system shows the user in the list of employees$/, function(){
     browser.url(systemLabels.BASE_URL+"/employees");
-    Employees.getLead(context.Employees.employee.leaderName);
-    browser.pause(10000);
+    Employees.isLeadNamePresentInEmployeeList(context.Employees.employee.leaderName);
+})
+
+Given(/^I shall be on the Employees List page$/, function(){
+    browser.url(systemLabels.BASE_URL+"/employees");
+})
+
+When(/^the system delete the user in the list of employees$/, function(){
+    Employees.getAndDeleteRow(context.Employees.employee.leaderName);
+})
+
+Then(/^the system does not show the user in the list of employees$/, function(){
+    Employees.isLeadNamePresentInEmployeeList(context.Employees.employee.leaderName);
+    browser.pause(1000);
     browser.closeWindow();
 })

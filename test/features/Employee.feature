@@ -10,4 +10,5 @@ Feature: Performing Add Employee Action
         When I fill out and send the form
         And I see the employee details
         Then the system shows the user in the list of employees
-
+        And the system delete the user in the list of employees 
+        Then the system does not show the user in the list of employees

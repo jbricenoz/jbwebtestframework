@@ -1,15 +1,18 @@
 import Page from './Base.page';
+import { context } from '../data/Context';
 
 class EmployeesPage extends Page {
 
     get lknCreateNewEmployee() { return $('//*[@id="content"]/p/a') }
-    get tblEmployees() { return $$('#content > table > tbody > tr'); }
+    get tblEmployees() { return $('#content > table > tbody'); }
     get lblLeadName() { return $('#content > p:nth-child(6)') }
 
 
     open() {
         super.open('employees');
     }
+
+
 
     createNewEmployee() {
         this.lknCreateNewEmployee.click();
@@ -20,20 +23,31 @@ class EmployeesPage extends Page {
         return this.lblLeadName.getText();
     }
 
-    getLead(leadName) {
-        // console.log($$('#content > table > tbody > tr').length-1);
-        var Row = $$('#content > table > tbody > tr');
-        var Cells = Row.getElementsByTagName("td");
-        console.log(Cells[0].innerTexts);
-        // console.log(this.tblEmployees);
-        // var table = this.tblEmployees;
-        // for (var r = 0, n = table.rows.length; r < n; r++) {
-        //     for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-        //         if (table.rows[r].cells[c].innerHTML == leadName) {
-        //             console.log(table.rows[r].cells[c].innerHTML);
-        //         }
-        //     }
-        // }
+    isLeadNamePresentInEmployeeList(leadName) {
+        var table = browser.$('#content > table > tbody');
+        table.$$('.//tr/td').map(function (element) {
+            if (element.getText() == leadName) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+    }
+
+    getAndDeleteRow(leadName) {
+        var table = browser.$('#content > table > tbody');
+        var tblLength = table.$$('.//tr').length - 1;
+        for (var i = 1; i < tblLength; i++) {
+            var tbl2 = browser.$('//*[@id="content"]/table/tbody/tr[' + i + ']');
+            tbl2.$$('.//td[4]').map(function (element) {
+                if (element.getText() == leadName) {
+                    console.log('CCC');
+                    console.log('Your employee is on the row: ' + i + ' and the lead name is: ' + element.getText());
+                    browser.$('//*[@id="content"]/table/tbody/tr[' + i + ']/td[9]').click();
+                    browser.acceptAlert();
+                }
+            })
+        }
     }
 }
 

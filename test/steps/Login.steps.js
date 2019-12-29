@@ -22,11 +22,7 @@ Then(/^I see the username in the top right corner of the website$/, function(){
     assert.equal(Login.getUsername(), "Welcome "+context.logins.user.user+", Logout");
 })
 
-Given(/^I shall be on the Employees List page$/, function(){
-    browser.url(systemLabels.BASE_URL+"/employees");
-})
-
-When(/^I see the Employees List tab selected$/, function(){
+Then(/^I see the Employees List tab selected$/, function(){
     assert.equal(Login.getCurrentCssClassEmployeesInformationMenuTab(), "selected");
 })
 

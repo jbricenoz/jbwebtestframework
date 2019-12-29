@@ -8,7 +8,8 @@ class LoginPage extends Page{
     get lblUser() { return $("#user_information > span") }
     get imgLogo() { return $("#logo_text > h1 > a > img") }
     get flash() { return $("#content > p.flash_notice") }
-    get lknEmployeesInformation()  { return $("#menu > li.selected > a") }
+    get lknEmployeesInformation()  { return $("#menu > li.selected") }
+
 
     open() {
         super.open('login');

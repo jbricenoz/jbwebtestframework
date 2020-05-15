@@ -1,4 +1,4 @@
-# jbwebtestframework
+# jbwdio
 WebdriverIO + Cucumber + JS + POM
 
 How to install:
